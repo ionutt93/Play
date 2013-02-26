@@ -1,9 +1,19 @@
 class Play
 {
+	public Play()
+	{
+
+	}
+
+	private void test()
+	{
+		for(int i = 1; i < 100; i++)
+			System.out.println("tested");
+	}
+
 	public static void main(String[] args)
 	{
-		System.out.println("branching2");
-		System.out.println("branching");
-		System.out.println("This is the true branch");		
+		Play p = new Play();
+		p.test();
 	}
 }
