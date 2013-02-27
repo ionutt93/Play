@@ -17,7 +17,7 @@ public class Room {
 		
 		for(int y = 0; y < block.length; y++) {
 			for(int x = 0; x < block[0].length; x++) {
-				block[y][x] = new Block(x * blockSize, y * blockSize, blockSize, blockSize, 0, 0);
+				block[y][x] = new Block(x * blockSize, y * blockSize, blockSize, blockSize, Value.groundGrass, Value.air);
 			}
 		}
 	}
