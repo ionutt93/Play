@@ -3,9 +3,9 @@ package Classes;
 import java.awt.*;
 
 public class Room {
-	private int worldWidth = 15;
-	private int worldHeight = 15;
-	private int blockSize = 32;
+	public static int worldWidth = 15; 
+	public static int worldHeight = 10;
+	public static int blockSize = 32;
 	public static Block[][] block;
 	
 	public Room() {

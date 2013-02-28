@@ -8,11 +8,16 @@ import java.io.*;
 public class Screen extends JPanel implements Runnable {
 	private Thread thread = new Thread(this);
 	private Boolean isFirst = true;
-	private int myWidth, myHeight;
+	public static int myWidth, myHeight;
 	public static Room room;
+	
 	public static Image[] groundTexture = new Image[100];
 	public static Image[] airTexture = new Image[100];
+	public static Image shopTexture;
+	
 	public static Save save;
+	public static Point mse = new Point(0, 0);
+	public static Store store;
 	
 	// Starts thread
 	
@@ -25,6 +30,8 @@ public class Screen extends JPanel implements Runnable {
 	public void define() {
 		room = new Room();
 		save = new Save();
+		store = new Store();
+		
 		for(int i = 0; i < groundTexture.length; i++) {
 			groundTexture[i] = new ImageIcon("resources/groundTexture.jpg").getImage();
 			groundTexture[i] = createImage(new FilteredImageSource(groundTexture[i].getSource(), new CropImageFilter(0, 26 * i, 26, 26)));
@@ -34,7 +41,7 @@ public class Screen extends JPanel implements Runnable {
 			airTexture[i] = new ImageIcon("resources/airTexture.jpg").getImage();
 			airTexture[i] = createImage(new FilteredImageSource(airTexture[i].getSource(), new CropImageFilter(0, 26 * i, 26, 26)));
 		}
-		
+		shopTexture = new ImageIcon("resources/shopTexture.jpg").getImage();
 		save.loadSave(new File("save/mission1.twdf"));
 	}
 	
@@ -47,8 +54,11 @@ public class Screen extends JPanel implements Runnable {
 			define();
 			isFirst = false;
 		}
-		g.clearRect(0, 0, getWidth(), getHeight());
+		g.setColor(new Color(60, 60, 60));
+		g.fillRect(0, 0, getWidth(), getHeight());
+		g.setColor(new Color(0, 0, 0));
 		room.draw(g);
+		store.draw(g);
 	}
 	
 	public int getMyWidth() {

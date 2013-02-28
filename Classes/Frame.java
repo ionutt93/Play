@@ -12,7 +12,7 @@ public class Frame extends JFrame {
 	
 	public Frame() {
 		title = "Tower Defence v1";
-		size = new Dimension(700, 600);
+		size = new Dimension(480, 400);
 		
 		setSize(size);
 		setTitle(title);
