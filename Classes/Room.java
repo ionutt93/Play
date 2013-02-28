@@ -6,7 +6,7 @@ public class Room {
 	private int worldWidth = 15;
 	private int worldHeight = 15;
 	private int blockSize = 32;
-	private Block[][] block;
+	public static Block[][] block;
 	
 	public Room() {
 		define();

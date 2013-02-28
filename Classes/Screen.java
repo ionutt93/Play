@@ -3,14 +3,16 @@ package Classes;
 import java.awt.*;
 import java.awt.image.*;
 import javax.swing.*;
+import java.io.*;
 
 public class Screen extends JPanel implements Runnable {
 	private Thread thread = new Thread(this);
 	private Boolean isFirst = true;
 	private int myWidth, myHeight;
-	private Room room;
+	public static Room room;
 	public static Image[] groundTexture = new Image[100];
 	public static Image[] airTexture = new Image[100];
+	private Save save;
 	
 	// Starts thread
 	
@@ -33,6 +35,7 @@ public class Screen extends JPanel implements Runnable {
 			airTexture[i] = createImage(new FilteredImageSource(airTexture[i].getSource(), new CropImageFilter(0, 26 * i, 26, 26)));
 		}
 		
+		save.loadSave(new File("save/mission1.twdf"));
 	}
 	
 	// Updates the graphics
