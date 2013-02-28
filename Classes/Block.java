@@ -3,8 +3,8 @@ package Classes;
 import java.awt.*;
 
 public class Block extends Rectangle {
-	public static int groundID;
-	public static int airID;
+	public int groundID;
+	public int airID;
 	
 	public Block(int x, int y, int width, int height, int groundID, int airID) {
 		setBounds(x, y, width, height);

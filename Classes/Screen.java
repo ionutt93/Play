@@ -12,7 +12,7 @@ public class Screen extends JPanel implements Runnable {
 	public static Room room;
 	public static Image[] groundTexture = new Image[100];
 	public static Image[] airTexture = new Image[100];
-	private Save save;
+	public static Save save;
 	
 	// Starts thread
 	
@@ -24,9 +24,9 @@ public class Screen extends JPanel implements Runnable {
 	
 	public void define() {
 		room = new Room();
-		
+		save = new Save();
 		for(int i = 0; i < groundTexture.length; i++) {
-			groundTexture[i] = new ImageIcon("resources/GroundTexture.jpg").getImage();
+			groundTexture[i] = new ImageIcon("resources/groundTexture.jpg").getImage();
 			groundTexture[i] = createImage(new FilteredImageSource(groundTexture[i].getSource(), new CropImageFilter(0, 26 * i, 26, 26)));
 		}
 		

@@ -21,6 +21,7 @@ public class Save {
 					}
 				}
 			}
+			scanner.close();
 	
 		} catch (Exception e) {
 			
