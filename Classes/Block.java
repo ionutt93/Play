@@ -13,6 +13,10 @@ public class Block extends Rectangle {
 	}
 	
 	public void draw(Graphics g) {
-		g.drawRect(x, y, width, height);
+		g.drawImage(Screen.groundTexture[groundID], x, y, width, height, null);
+		
+		if(airID != Value.air) {
+			
+		}
 	}
 }

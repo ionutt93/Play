@@ -1,8 +1,7 @@
 package Classes;
 
 import java.awt.*;
-import java.awt.image.FilteredImageSource;
-
+import java.awt.image.*;
 import javax.swing.*;
 
 public class Screen extends JPanel implements Runnable {
@@ -10,8 +9,8 @@ public class Screen extends JPanel implements Runnable {
 	private Boolean isFirst = true;
 	private int myWidth, myHeight;
 	private Room room;
-	private Image[] groundTexture = new Image[100];
-	private Image[] airTexture = new Image[100];
+	public static Image[] groundTexture = new Image[100];
+	public static Image[] airTexture = new Image[100];
 	
 	// Starts thread
 	
@@ -25,9 +24,15 @@ public class Screen extends JPanel implements Runnable {
 		room = new Room();
 		
 		for(int i = 0; i < groundTexture.length; i++) {
-			groundTexture[i] = new ImageIcon("resources/GrassTexture.jpg").getImage();
-			// groundTexture[i] = createImage(new FilteredImageSource(groundTexture[i].getSource()));
+			groundTexture[i] = new ImageIcon("resources/GroundTexture.jpg").getImage();
+			groundTexture[i] = createImage(new FilteredImageSource(groundTexture[i].getSource(), new CropImageFilter(0, 26 * i, 26, 26)));
 		}
+		
+		for(int i = 0; i < airTexture.length; i++) {
+			airTexture[i] = new ImageIcon("resources/airTexture.jpg").getImage();
+			airTexture[i] = createImage(new FilteredImageSource(airTexture[i].getSource(), new CropImageFilter(0, 26 * i, 26, 26)));
+		}
+		
 	}
 	
 	// Updates the graphics
