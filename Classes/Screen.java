@@ -9,15 +9,22 @@ public class Screen extends JPanel implements Runnable {
 	private Thread thread = new Thread(this);
 	private Boolean isFirst = true;
 	public static int myWidth, myHeight;
+	public static int coins = 10, health = 25;
 	public static Room room;
 	
 	public static Image[] groundTexture = new Image[100];
 	public static Image[] airTexture = new Image[100];
 	public static Image shopTexture;
+	public static Image coinTexture;
+	public static Image heartTexture;
+	public static Image mobTexture;
 	
 	public static Save save;
 	public static Point mse = new Point(0, 0);
 	public static Store store;
+	
+	public static Mob[] mobs = new Mob[100];
+	public int spawnTime = 2000, spawnFrame = 0; 
 	
 	// Starts thread
 	
@@ -44,7 +51,14 @@ public class Screen extends JPanel implements Runnable {
 			airTexture[i] = createImage(new FilteredImageSource(airTexture[i].getSource(), new CropImageFilter(0, 26 * i, 26, 26)));
 		}
 		shopTexture = new ImageIcon("resources/shopTexture.png").getImage();
+		coinTexture = new ImageIcon("resources/coinTexture.png").getImage();
+		heartTexture = new ImageIcon("resources/heartTexture.png").getImage();
+		mobTexture = new ImageIcon("resources/mobTexture.png").getImage();
+		
 		save.loadSave(new File("save/mission1.twdf"));
+		for(int i = 0; i < mobs.length; i++) {
+			mobs[i] = new Mob();
+		}
 	}
 	
 	// Updates the graphics
@@ -60,7 +74,27 @@ public class Screen extends JPanel implements Runnable {
 		g.fillRect(0, 0, getWidth(), getHeight());
 		g.setColor(new Color(0, 0, 0));
 		room.draw(g);
+		for(int i = 0; i< mobs.length; i++) {
+			if(mobs[i].inGame) {
+				mobs[i].draw(g);
+			}
+		}
+		
 		store.draw(g);
+	}
+	
+	public void mobSpawner() {
+		if(spawnFrame >= spawnTime) {
+			for(int i = 0; i < mobs.length; i++) {
+				if(!mobs[i].inGame) {
+					mobs[i].spawnMob(Value.mobGround);
+					break;
+				}
+			}
+			spawnFrame = 0;
+		} else {
+			spawnFrame += 1;
+		}
 	}
 	
 	public int getMyWidth() {
@@ -77,6 +111,12 @@ public class Screen extends JPanel implements Runnable {
 		while(true)	{
 			if(!isFirst) {
 				room.physic();
+				mobSpawner();
+				for(int i = 0; i < mobs.length; i++) {
+					if(mobs[i].inGame) {
+						mobs[i].physics();
+					}
+				}
 			}
 			repaint();
 			
