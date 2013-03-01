@@ -5,7 +5,7 @@ import java.awt.*;
 
 public class Frame extends JFrame {
 	private String title;
-	private Dimension size;
+	public static Dimension size;
 	private Screen screen;
 	
 	// Creates the frame for the application
@@ -27,7 +27,7 @@ public class Frame extends JFrame {
 	
 	public void init() {
 		setLayout(new GridLayout(1, 1, 0, 0));
-		screen = new Screen();
+		screen = new Screen(this);
 		add(screen);
 		setVisible(true);
 	}

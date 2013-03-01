@@ -21,7 +21,9 @@ public class Screen extends JPanel implements Runnable {
 	
 	// Starts thread
 	
-	public Screen() {
+	public Screen(Frame frame) {
+		frame.addMouseListener(new KeyHandler());
+		frame.addMouseMotionListener(new KeyHandler());
 		thread.start();
 	}
 	
@@ -41,7 +43,7 @@ public class Screen extends JPanel implements Runnable {
 			airTexture[i] = new ImageIcon("resources/airTexture.jpg").getImage();
 			airTexture[i] = createImage(new FilteredImageSource(airTexture[i].getSource(), new CropImageFilter(0, 26 * i, 26, 26)));
 		}
-		shopTexture = new ImageIcon("resources/shopTexture.jpg").getImage();
+		shopTexture = new ImageIcon("resources/shopTexture.png").getImage();
 		save.loadSave(new File("save/mission1.twdf"));
 	}
 	

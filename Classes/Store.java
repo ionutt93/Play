@@ -24,7 +24,12 @@ public class Store {
 	
 	public void draw(Graphics g) {
 		for(int i = 0; i < button.length; i++) {
-			g.drawImage(Screen.shopTexture ,button[i].x, button[i].y, button[i].width, button[i].height, null);
+			if(button[i].contains(Screen.mse)) {
+				g.setColor(new Color(0, 0, 0, 150));
+				g.fillRect(button[i].x, button[i].y, button[i].width, button[i].height);
+			}
+			
+			g.drawImage(Screen.shopTexture, button[i].x, button[i].y, button[i].width, button[i].height, null);
 		}
 	}
 }
