@@ -32,6 +32,14 @@ public class Mob extends Rectangle {
 		inGame = true;
 	}
 	
+	public void deleteMob() {
+		inGame = false;
+	}
+	
+	public void looseHealth() {
+		Screen.health -= 1;
+	}
+	
 	public void physics() {
 		if(walkFrame >= walkSpeed) {
 			if(direction == right) {
@@ -86,6 +94,11 @@ public class Mob extends Rectangle {
 							direction = left;
 						}
 					} catch (Exception e) {	}
+				}
+				if(Screen.room.block[yC][xC].airID == Value.mobAir) {
+					deleteMob();
+
+					looseHealth();
 				}
 				wasUp = false;
 				wasDown = false;

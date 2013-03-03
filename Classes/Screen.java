@@ -42,12 +42,12 @@ public class Screen extends JPanel implements Runnable {
 		store = new Store();
 		
 		for(int i = 0; i < groundTexture.length; i++) {
-			groundTexture[i] = new ImageIcon("resources/groundTexture.jpg").getImage();
+			groundTexture[i] = new ImageIcon("resources/groundTexture.png").getImage();
 			groundTexture[i] = createImage(new FilteredImageSource(groundTexture[i].getSource(), new CropImageFilter(0, 26 * i, 26, 26)));
 		}
 		
 		for(int i = 0; i < airTexture.length; i++) {
-			airTexture[i] = new ImageIcon("resources/airTexture.jpg").getImage();
+			airTexture[i] = new ImageIcon("resources/airTexture.png").getImage();
 			airTexture[i] = createImage(new FilteredImageSource(airTexture[i].getSource(), new CropImageFilter(0, 26 * i, 26, 26)));
 		}
 		shopTexture = new ImageIcon("resources/shopTexture.png").getImage();
