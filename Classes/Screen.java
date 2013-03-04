@@ -8,6 +8,7 @@ import java.io.*;
 public class Screen extends JPanel implements Runnable {
 	private Thread thread = new Thread(this);
 	private Boolean isFirst = true;
+	public static Boolean isDebug = true;
 	public static int myWidth, myHeight;
 	public static int coins = 10, health = 25;
 	public static Room room;
@@ -74,6 +75,7 @@ public class Screen extends JPanel implements Runnable {
 		g.fillRect(0, 0, getWidth(), getHeight());
 		g.setColor(new Color(0, 0, 0));
 		room.draw(g);
+		
 		for(int i = 0; i< mobs.length; i++) {
 			if(mobs[i].inGame) {
 				mobs[i].draw(g);

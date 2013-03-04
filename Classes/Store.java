@@ -7,7 +7,9 @@ public class Store {
 	private Rectangle[] button = new Rectangle[shopWidth];
 	private Rectangle buttonHealth;
 	private Rectangle buttonCoins;
-	public static int[] buttonID = {0, 0, 0, 0, 0, 0, 0, 1};
+	public static int[] buttonID = {Value.airLaserTower, Value.air, Value.air, Value.air, Value.air, Value.air, Value.air, Value.airTrashCan};
+	public static int[] buttonPrice = {10, 0, 0, 0, 0, 0, 0, 0};
+	public static int priceID = 0;
 	private int buttonSize = 32;
 	private int iconSize = 20;
 	private int cellSpace = 2;
@@ -25,11 +27,27 @@ public class Store {
 		if(mouseButton == 1) {
 			for(int i = 0; i < button.length; i++) {
 				if(button[i].contains(Screen.mse)) {
-					if(heldID == Value.airTrashCan) {
-						holdsItem = false;
-					} else {
-						heldID = buttonID[i];
-						holdsItem = true;
+					if(buttonID[i] != Value.air) {
+						if(buttonID[i] == Value.airTrashCan) {
+							holdsItem = false;
+						} else {
+							heldID = buttonID[i];
+							priceID = i;
+							holdsItem = true;
+						}
+					}
+				}
+			}
+			if(holdsItem) {
+				if(Screen.coins >= buttonPrice[priceID]) {
+					for(int y = 0; y < Screen.room.block.length; y++) {
+						for(int x = 0; x < Screen.room.block[0].length; x++) {
+							if(Screen.room.block[y][x].contains(Screen.mse))
+								if(Screen.room.block[y][x].groundID != Value.groundRoad && Screen.room.block[y][x].airID == Value.air) {
+									Screen.room.block[y][x].airID = heldID;
+									Screen.coins -= buttonPrice[priceID];
+								}
+						}
 					}
 				}
 			}
@@ -55,7 +73,13 @@ public class Store {
 			}
 			
 			g.drawImage(Screen.shopTexture, button[i].x, button[i].y, button[i].width, button[i].height, null);
-			g.drawImage(Screen.airTexture[buttonID[i]], button[i].x, button[i].y, button[i].width, button[i].height, null);
+			if(buttonID[i] != Value.air) 
+				g.drawImage(Screen.airTexture[buttonID[i]], button[i].x, button[i].y, button[i].width, button[i].height, null);
+			if(buttonPrice[i] > 0) {
+				g.setColor(Color.white);
+				g.setFont(new Font("Courrier New", Font.BOLD, 14));
+				g.drawString("$" + buttonPrice[i], button[i].x, button[i].y + 12);
+			}
 		}
 		
 		g.drawImage(Screen.heartTexture, buttonHealth.x, buttonHealth.y, buttonHealth.width, buttonHealth.height, null);
