@@ -83,6 +83,14 @@ public class Screen extends JPanel implements Runnable {
 		}
 		
 		store.draw(g);
+		
+		if(health < 1) {
+			g.setColor(new Color(240, 20, 20));
+			g.fillRect(0, 0, myWidth, myHeight);
+			g.setColor(new Color(255, 255, 255));
+			g.setFont(new Font("Courier New", Font.BOLD, 14));
+			g.drawString("Game over, better luck next time :D", 10, 20);
+		}
 	}
 	
 	public void mobSpawner() {

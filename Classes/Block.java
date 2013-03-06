@@ -7,6 +7,8 @@ public class Block extends Rectangle {
 	public int airID;
 	public Rectangle range;
 	public int rangeSize = 100;
+	public int shotMob = 0;
+	public boolean isShooting = false;
 	
 	public Block(int x, int y, int width, int height, int groundID, int airID) {
 		setBounds(x, y, width, height);
@@ -27,6 +29,14 @@ public class Block extends Rectangle {
 		if(Screen.isDebug) {
 			if(airID == Value.airLaserTower) {
 				g.drawRect(range.x, range.y, range.width, range.height);
+			}
+		}
+	}
+	
+	public void physiscs() {
+		for(int i = 0; i < Screen.mobs.length; i++) {
+			if(Screen.mobs[i].inGame) {
+				if(Screen.mobs[i].contains(range));
 			}
 		}
 	}
